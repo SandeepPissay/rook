@@ -1,0 +1,102 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cephfs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+    - name: test-container
+      image: gcr.io/google_containers/busybox:1.24
+      command: ["/bin/sh", "-c", "while true; do echo 'Hello! This is Pod1' >> /mnt/volume1/index.html; sleep 2 ; done"]
+      volumeMounts:
+        - name: test-volume
+          mountPath: /mnt/volume1
+  restartPolicy: Never
+  volumes:
+    - name: test-volume
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+spec:
+  containers:
+    - name: test-container
+      image: gcr.io/google_containers/busybox:1.24
+      command: ["/bin/sh", "-c", "while true; do echo 'Hello! This is Pod2' >> /mnt/volume1/index.html; sleep 2 ; done"]
+      volumeMounts:
+        - name: test-volume
+          mountPath: /mnt/volume1
+  restartPolicy: Never
+  volumes:
+    - name: test-volume
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3
+spec:
+  containers:
+    - name: test-container
+      image: gcr.io/google_containers/busybox:1.24
+      command: ["/bin/sh", "-c", "while true; do echo 'Hello! This is Pod3' >> /mnt/volume1/index.html; sleep 2 ; done"]
+      volumeMounts:
+        - name: test-volume
+          mountPath: /mnt/volume1
+  restartPolicy: Never
+  volumes:
+    - name: test-volume
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-4
+spec:
+  containers:
+    - name: test-container
+      image: gcr.io/google_containers/busybox:1.24
+      command: ["/bin/sh", "-c", "while true; do echo 'Hello! This is Pod4' >> /mnt/volume1/index.html; sleep 2 ; done"]
+      volumeMounts:
+        - name: test-volume
+          mountPath: /mnt/volume1
+  restartPolicy: Never
+  volumes:
+    - name: test-volume
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-5
+spec:
+  containers:
+    - name: test-container
+      image: gcr.io/google_containers/busybox:1.24
+      command: ["/bin/sh", "-c", "while true; do echo 'Hello! This is Pod5' >> /mnt/volume1/index.html; sleep 2 ; done"]
+      volumeMounts:
+        - name: test-volume
+          mountPath: /mnt/volume1
+  restartPolicy: Never
+  volumes:
+    - name: test-volume
+      persistentVolumeClaim:
+        claimName: cephfs-pvc

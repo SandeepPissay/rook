@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - name: web-server
-      image: nginx
+      image: quay.io/sandeeppissay/nginx:1.17.6
       volumeMounts:
         - name: mypvc
           mountPath: /var/lib/www/html

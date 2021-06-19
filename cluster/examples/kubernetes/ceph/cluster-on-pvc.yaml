@@ -28,12 +28,12 @@ spec:
     # size appropriate for monitor data will be used.
     volumeClaimTemplate:
       spec:
-        storageClassName: gp2
+        storageClassName: gc-storage-profile
         resources:
           requests:
             storage: 10Gi
   cephVersion:
-    image: ceph/ceph:v15.2.13
+    image: quay.io/sandeeppissay/ceph:v15.2.13
     allowUnsupported: false
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false
@@ -126,7 +126,7 @@ spec:
                 requests:
                   storage: 10Gi
               # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
-              storageClassName: gp2
+              storageClassName: gc-storage-profile
               volumeMode: Block
               accessModes:
                 - ReadWriteOnce
